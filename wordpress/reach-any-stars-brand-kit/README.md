@@ -1,15 +1,18 @@
 # Reach Any Stars — Brand Kit
 
 Everything to skin your WordPress + WooCommerce store in the brand: the `reach-any-stars`
-child theme (color tokens, Manrope typography, spacing, element styles), the logo PNGs,
+**standalone block theme** (Full Site Editing) — color tokens, Manrope typography, spacing,
+element + WooCommerce styles, header/footer parts and block templates — plus the logo PNGs
 and a full favicon set. Built to be handed to Claude Code on your computer.
 
 ```
 reach-any-stars-brand-kit/
-├── reach-any-stars/            ← the child theme. ZIP THIS FOLDER to upload to WordPress.
-│   ├── style.css               ← theme header (set the Template line — see install step 1)
-│   ├── functions.php
-│   ├── theme.json              ← all brand tokens live here
+├── reach-any-stars/            ← the block theme. ZIP THIS FOLDER to upload to WordPress.
+│   ├── style.css               ← theme header (no Template line — standalone, not a child)
+│   ├── functions.php           ← block-theme + WooCommerce supports
+│   ├── theme.json              ← all brand tokens live here (single source of truth)
+│   ├── templates/              ← front-page, index, page, single, archive, search, 404
+│   ├── parts/                  ← header.html, footer.html
 │   └── assets/
 │       ├── fonts/Manrope[wght].woff2     (self-hosted variable font, 200–800)
 │       └── images/             (logo PNGs the theme/header can use)
@@ -63,21 +66,22 @@ quiet and neutral. No gold, no brass.
 
 ---
 
-## Install the child theme
+## Install the theme
 
-1. **Pick your parent**, then open `reach-any-stars/style.css` and set the `Template:` line to
-   match it. It's currently `Template: blocksy`. Change to `kadence` or `astra` if that's what
-   you installed. (Parent must be installed and present for the child to activate.)
-2. **Zip the `reach-any-stars` folder** (the folder itself, so the zip contains
+This is a **standalone block theme** — there is no parent to install. WooCommerce should be
+active for the shop/product/cart templates to render.
+
+1. **Zip the `reach-any-stars` folder** (the folder itself, so the zip contains
    `reach-any-stars/style.css`, not loose files).
-3. In WordPress: **Appearance → Themes → Add New → Upload Theme**, choose the zip, install,
-   then **Activate**. The parent stays installed; the child rides on top.
-4. Open **Appearance → Editor → Styles** — the Reach Any Stars palette and Manrope are now the
-   defaults. Manrope's `@font-face` is generated automatically from `theme.json`; nothing to
-   enqueue by hand.
+2. In WordPress: **Appearance → Themes → Add New → Upload Theme**, choose the zip, install,
+   then **Activate**.
+3. Open **Appearance → Editor** — header/footer parts and all templates (front page, shop,
+   single product, cart, etc.) are editable as blocks. **Styles** shows the Reach Any Stars
+   palette and Manrope as defaults. Manrope's `@font-face` is generated automatically from
+   `theme.json`; nothing to enqueue by hand.
 
-> Building locally first (LocalWP / WordPress Studio): install the parent + this child the same
-> way, then carry both across in your site export when you go live.
+> Building locally first (LocalWP / WordPress Studio): install + activate this theme and
+> WooCommerce, then carry the theme across in your site export when you go live.
 
 ---
 

@@ -1,13 +1,12 @@
 /*
 Theme Name: Reach Any Stars
 Theme URI: https://reachanystars.com
-Description: Brand child theme for Reach Any Stars. Injects the brand token system (color, Manrope typography, spacing) over a block-theme parent. Aesthetic: geometric bones, organic skin — neutral greige + charcoal, no gold/brass. Set the Template line below to whichever block parent you install (blocksy / kadence / astra).
+Description: Standalone block theme (FSE) for Reach Any Stars. The brand token system — color, Manrope typography, spacing, element + WooCommerce styles — lives in theme.json as the single source of truth. Aesthetic: geometric bones, organic skin — neutral greige + charcoal, no gold/brass.
 Author: Reach Any Stars LLC
 Version: 1.0.0
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 8.0
-Template: blocksy
 Text Domain: reach-any-stars
 License: GNU General Public License v2 or later
 */
