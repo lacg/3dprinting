@@ -1,0 +1,9 @@
+# WordPress Studio site install — do NOT commit (huge, contains DB + secrets)
+wordpress/site/
+
+# macOS
+.DS_Store
+
+# Editor/OS cruft
+*.swp
+Thumbs.db
