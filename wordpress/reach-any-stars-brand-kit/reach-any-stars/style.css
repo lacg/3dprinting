@@ -12,3 +12,76 @@ License: GNU General Public License v2 or later
 */
 
 /* Brand tokens live in theme.json. Add any hand-written CSS overrides below. */
+
+/* Header brand lockup: show the mark by default, reveal the wordmark on
+   hover/focus. Width is clipped (not display:none) so it animates smoothly,
+   and it expands leftward into empty space so the nav never reflows. */
+.ras-brand .wp-block-site-title {
+	max-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	opacity: 0;
+	transform: translateX(-0.5rem);
+	/* Space opens on a decelerating curve; the text fades in slightly behind
+	   it (longer + small delay) so the wordmark emerges rather than snaps in. */
+	transition:
+		max-width 1s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 1.2s ease 0.2s;
+}
+
+.ras-brand:hover .wp-block-site-title,
+.ras-brand:focus-within .wp-block-site-title {
+	max-width: 16rem;
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Respect users who prefer reduced motion: reveal instantly, no animation. */
+@media (prefers-reduced-motion: reduce) {
+	.ras-brand .wp-block-site-title {
+		transition: none;
+		transform: none;
+	}
+}
+
+/* ===== DARK MODE — follows the OS / system colour scheme ===== */
+@media (prefers-color-scheme: dark) {
+	html:root {
+		color-scheme: dark;
+		/* Flip the 5 neutral tokens; everything referencing them inverts together. */
+		--wp--preset--color--ras-paper: #1a1714;   /* page / header / footer bg */
+		--wp--preset--color--ras-surface: #242019; /* cards / raised surfaces */
+		--wp--preset--color--ras-ink: #ece7df;     /* primary text (was dark) */
+		--wp--preset--color--ras-muted: #a99f92;   /* secondary text */
+		--wp--preset--color--ras-line: #38322b;    /* hairlines */
+		--wp--preset--color--ras-graphite: #2c261f;/* CTA band — lift above page bg */
+	}
+
+	/* CTA band button: its text is ras-ink, now light — force it dark so the
+	   light-bg button stays readable. !important to beat WP's has-*-color. */
+	html:root .wp-block-button__link.has-ras-light-background-color.has-ras-ink-color {
+		color: #1a1714 !important;
+	}
+
+	/* Header mark is the graphite (dark) logo — invert it to read on a dark bg. */
+	html:root .wp-block-site-logo img {
+		filter: invert(1);
+	}
+
+	/* No product photos yet: WooCommerce's light placeholder images dominate on
+	   dark. Dim them so cards read as intentional. Real photos won't match this. */
+	html:root img.woocommerce-placeholder,
+	html:root img.wp-post-image[src*="woocommerce-placeholder"] {
+		opacity: 0.12;
+	}
+}
+
+/* Touch devices have no hover — keep the wordmark visible there so the brand
+   name is never hidden on phones/tablets. */
+@media (hover: none) {
+	.ras-brand .wp-block-site-title {
+		max-width: 16rem;
+		opacity: 1;
+	}
+}
