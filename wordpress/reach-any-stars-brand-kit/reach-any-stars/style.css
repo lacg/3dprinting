@@ -105,6 +105,41 @@ License: GNU General Public License v2 or later
 	line-height: 1.1;
 }
 
+/* Hero: a tall, spacious, centred opening that reveals on load. */
+.ras-hero {
+	min-height: min(82vh, 760px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: var(--wp--preset--spacing--40);
+}
+.ras-hero > * {
+	margin-block: 0;
+	max-width: 60rem;
+	animation: ras-rise-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ras-hero .wp-block-heading {
+	letter-spacing: -0.02em;
+}
+.ras-hero p {
+	max-width: 44ch;          /* tighter measure reads better centred */
+}
+@keyframes ras-rise-in {
+	from { opacity: 0; transform: translateY(1.2rem); }
+	to   { opacity: 1; transform: none; }
+}
+.ras-hero > :nth-child(1) { animation-delay: 0.15s; }
+.ras-hero > :nth-child(2) { animation-delay: 0.35s; }
+.ras-hero > :nth-child(3) { animation-delay: 0.55s; }
+
+@media (prefers-reduced-motion: reduce) {
+	.ras-hero > * {
+		animation: none;
+	}
+}
+
 /* ===== DARK MODE — follows the OS / system colour scheme ===== */
 @media (prefers-color-scheme: dark) {
 	html:root {
