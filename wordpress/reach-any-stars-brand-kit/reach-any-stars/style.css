@@ -45,6 +45,66 @@ License: GNU General Public License v2 or later
 	}
 }
 
+/* Header layout: logo left, menu centred, cart pinned right. Grid 1fr/auto/1fr
+   forces the side columns equal so the menu is truly centred regardless of how
+   wide the logo or cart get. */
+.ras-header-bar {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: var(--wp--preset--spacing--40);
+}
+.ras-header-bar > .ras-brand {
+	justify-self: start;
+}
+.ras-header-bar > .ras-nav {
+	justify-self: center;
+}
+.ras-header-bar > .ras-cart {
+	justify-self: end;
+}
+
+/* Menu words animate in on page load (staggered), once — no hover needed.
+   The cart is a separate grid child with no animation, so it shows instantly. */
+@keyframes ras-menu-in {
+	from { opacity: 0; transform: translateY(-0.4rem); }
+	to   { opacity: 1; transform: none; }
+}
+.ras-nav .wp-block-navigation-item {
+	animation: ras-menu-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ras-nav .wp-block-navigation-item:nth-child(1) { animation-delay: 0.10s; }
+.ras-nav .wp-block-navigation-item:nth-child(2) { animation-delay: 0.22s; }
+.ras-nav .wp-block-navigation-item:nth-child(3) { animation-delay: 0.34s; }
+.ras-nav .wp-block-navigation-item:nth-child(4) { animation-delay: 0.46s; }
+
+@media (prefers-reduced-motion: reduce) {
+	.ras-nav .wp-block-navigation-item {
+		animation: none;
+	}
+}
+
+/* Align the brand row with the menu. WordPress's flow-layout CSS injects a
+   margin-block-start onto the 2nd/3rd grid children (nav, cart) which—when
+   centred—nudges them down and leaves the brand looking high. Zero those
+   margins and force every column to share the same optical centre. */
+.ras-header-bar,
+.ras-brand {
+	align-items: center;
+}
+.ras-header-bar > * {
+	margin-block: 0;
+	align-self: center;
+}
+.ras-brand .wp-block-site-logo,
+.ras-brand .wp-block-site-logo img {
+	display: block;
+}
+.ras-brand .wp-block-site-title {
+	margin: 0;
+	line-height: 1.1;
+}
+
 /* ===== DARK MODE — follows the OS / system colour scheme ===== */
 @media (prefers-color-scheme: dark) {
 	html:root {

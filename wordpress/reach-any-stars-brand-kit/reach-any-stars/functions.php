@@ -28,10 +28,14 @@ add_action( 'after_setup_theme', function () {
 
 // Load style.css on the front end for any hand-written CSS overrides.
 add_action( 'wp_enqueue_scripts', function () {
+	// Version by file mtime so edits bust the browser cache automatically
+	// (no more stale CSS after a change). Falls back to the theme version.
+	$style_path = get_stylesheet_directory() . '/style.css';
+	$style_ver  = file_exists( $style_path ) ? filemtime( $style_path ) : wp_get_theme()->get( 'Version' );
 	wp_enqueue_style(
 		'reach-any-stars',
 		get_stylesheet_uri(),
 		array(),
-		wp_get_theme()->get( 'Version' )
+		$style_ver
 	);
 }, 20 );
