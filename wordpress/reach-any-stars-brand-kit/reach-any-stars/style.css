@@ -140,6 +140,36 @@ License: GNU General Public License v2 or later
 	}
 }
 
+/* Fluent Forms — match the Reach Any Stars palette (inputs + submit button).
+   Button uses !important to beat Fluent Forms' inline colour, and references
+   palette variables so it auto-adapts in dark mode. */
+.fluentform .ff-el-form-control {
+	border: 1px solid var(--wp--preset--color--ras-line);
+	background-color: var(--wp--preset--color--ras-surface);
+	color: var(--wp--preset--color--ras-ink);
+	border-radius: 6px;
+}
+.fluentform .ff-el-form-control:focus {
+	border-color: var(--wp--preset--color--ras-ink);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(110, 102, 92, 0.18);
+}
+.fluentform .ff-btn-submit {
+	background-color: var(--wp--preset--color--ras-ink) !important;
+	color: var(--wp--preset--color--ras-paper) !important;
+	border: none !important;
+	border-radius: 6px !important;
+	padding: 0.85rem 1.6rem !important;
+	font-weight: 600;
+	letter-spacing: 0.005em;
+	box-shadow: none !important;
+}
+.fluentform .ff-btn-submit:hover,
+.fluentform .ff-btn-submit:focus {
+	background-color: var(--wp--preset--color--ras-warm-charcoal) !important;
+	color: var(--wp--preset--color--ras-light) !important;
+}
+
 /* ===== DARK MODE — follows the OS / system colour scheme ===== */
 @media (prefers-color-scheme: dark) {
 	html:root {
