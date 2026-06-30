@@ -26,7 +26,10 @@
 				{ "slug": "ras-warm-charcoal",  "name": "Warm Charcoal",  "color": "#241F1B" },
 				{ "slug": "ras-aluminum",       "name": "Aluminum",       "color": "#BFBFB6" },
 				{ "slug": "ras-greige",         "name": "Greige",         "color": "#C4B9A6" },
-				{ "slug": "ras-light",          "name": "Light",          "color": "#EDEAE4" }
+				{ "slug": "ras-light",          "name": "Light",          "color": "#EDEAE4" },
+				{ "slug": "ras-gold",           "name": "Gold",           "color": "#B8893B" },
+				{ "slug": "ras-gold-light",     "name": "Gold Light",     "color": "#CDA35A" },
+				{ "slug": "ras-gold-dark",      "name": "Gold Dark",      "color": "#8A6526" }
 			]
 		},
 		"typography": {
@@ -106,14 +109,14 @@
 			},
 			"button": {
 				"color": {
-					"background": "var(--wp--preset--color--ras-ink)",
-					"text": "var(--wp--preset--color--ras-paper)"
+					"background": "var(--wp--preset--color--ras-gold)",
+					"text": "#ffffff"
 				},
 				"border": { "radius": "6px" },
 				"spacing": { "padding": { "top": "0.85rem", "bottom": "0.85rem", "left": "1.6rem", "right": "1.6rem" } },
 				"typography": { "fontWeight": "600", "letterSpacing": "0.005em" },
-				":hover": { "color": { "background": "var(--wp--preset--color--ras-warm-charcoal)", "text": "var(--wp--preset--color--ras-light)" } },
-				":focus": { "color": { "background": "var(--wp--preset--color--ras-warm-charcoal)", "text": "var(--wp--preset--color--ras-light)" } }
+				":hover": { "color": { "background": "var(--wp--preset--color--ras-gold-dark)", "text": "#ffffff" } },
+				":focus": { "color": { "background": "var(--wp--preset--color--ras-gold-dark)", "text": "#ffffff" } }
 			}
 		}
 	}

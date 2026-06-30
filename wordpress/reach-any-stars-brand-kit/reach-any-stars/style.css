@@ -164,6 +164,94 @@ License: GNU General Public License v2 or later
 	}
 }
 
+/* ============================================================
+   Accent — Antique Gold + glossy "lift" buttons (selective skeuomorphism).
+   Depth lives only on the interactive layer; the layout stays flat.
+   Gold tokens come from theme.json (ras-gold / -light / -dark).
+   ============================================================ */
+
+/* Primary buttons: glossy gold gradient, gentle lift + highlight on hover,
+   sink on press. Covers core blocks + WooCommerce (Fluent Forms submit gets the
+   same treatment in its own rule below). !important beats Woo's button colours
+   and WP's per-button colour classes. */
+.wp-element-button,
+.wp-block-button__link,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce .button,
+.woocommerce #respond input#submit {
+	background: linear-gradient(180deg,
+		var(--wp--preset--color--ras-gold-light),
+		var(--wp--preset--color--ras-gold) 52%,
+		var(--wp--preset--color--ras-gold-dark)) !important;
+	color: #fff !important;
+	border: 0 !important;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 3px 7px rgba(0, 0, 0, .25) !important;
+	transition: transform .14s cubic-bezier(.22, 1, .36, 1), box-shadow .14s, filter .12s;
+}
+.wp-element-button:hover,
+.wp-block-button__link:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce .button:hover,
+.woocommerce #respond input#submit:hover {
+	transform: translateY(-1.5px);
+	filter: brightness(1.08);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 7px 14px rgba(110, 80, 20, .26) !important;
+}
+.wp-element-button:active,
+.wp-block-button__link:active,
+.woocommerce a.button:active,
+.woocommerce button.button:active,
+.woocommerce .button:active,
+.woocommerce #respond input#submit:active {
+	transform: translateY(0);
+	box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35), 0 3px 6px rgba(0, 0, 0, .2) !important;
+}
+.wp-element-button:focus-visible,
+.wp-block-button__link:focus-visible,
+.woocommerce a.button:focus-visible,
+.woocommerce button.button:focus-visible {
+	outline: 2px solid var(--wp--preset--color--ras-gold);
+	outline-offset: 2px;
+}
+
+/* Secondary (outline) buttons: gold outline that fills with the gloss on hover. */
+.wp-block-button.is-style-outline > .wp-block-button__link {
+	background: transparent !important;
+	color: var(--wp--preset--color--ras-gold-dark) !important;
+	border: 1.5px solid var(--wp--preset--color--ras-gold) !important;
+	box-shadow: none !important;
+}
+.wp-block-button.is-style-outline > .wp-block-button__link:hover {
+	background: linear-gradient(180deg,
+		var(--wp--preset--color--ras-gold-light),
+		var(--wp--preset--color--ras-gold) 52%,
+		var(--wp--preset--color--ras-gold-dark)) !important;
+	color: #fff !important;
+	transform: translateY(-1.5px);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 7px 14px rgba(110, 80, 20, .26) !important;
+}
+
+/* Price as a quiet gold accent. */
+.woocommerce-Price-amount,
+.woocommerce ul.products li.product .price,
+.woocommerce div.product p.price {
+	color: var(--wp--preset--color--ras-gold-dark);
+}
+
+/* Reduced motion: keep the gloss + highlight, drop the lift/press travel. */
+@media (prefers-reduced-motion: reduce) {
+	.wp-element-button:hover,
+	.wp-block-button__link:hover,
+	.woocommerce a.button:hover,
+	.woocommerce .button:hover,
+	.wp-block-button.is-style-outline > .wp-block-button__link:hover,
+	.fluentform .ff-btn-submit:hover {
+		transform: none;
+	}
+}
+
 /* Fluent Forms — match the Reach Any Stars palette (inputs + submit button).
    Button uses !important to beat Fluent Forms' inline colour, and references
    palette variables so it auto-adapts in dark mode. */
@@ -180,24 +268,33 @@ License: GNU General Public License v2 or later
 	opacity: 0.7;
 }
 .fluentform .ff-el-form-control:focus {
-	border-color: var(--wp--preset--color--ras-ink);
+	border-color: var(--wp--preset--color--ras-gold);
 	outline: none;
-	box-shadow: 0 0 0 3px rgba(110, 102, 92, 0.18);
+	box-shadow: 0 0 0 3px rgba(184, 137, 59, 0.22);
 }
 .fluentform .ff-btn-submit {
-	background-color: var(--wp--preset--color--ras-ink) !important;
-	color: var(--wp--preset--color--ras-paper) !important;
+	background: linear-gradient(180deg,
+		var(--wp--preset--color--ras-gold-light),
+		var(--wp--preset--color--ras-gold) 52%,
+		var(--wp--preset--color--ras-gold-dark)) !important;
+	color: #fff !important;
 	border: none !important;
 	border-radius: 6px !important;
 	padding: 0.85rem 1.6rem !important;
 	font-weight: 600;
 	letter-spacing: 0.005em;
-	box-shadow: none !important;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 3px 7px rgba(0, 0, 0, .25) !important;
+	transition: transform .14s cubic-bezier(.22, 1, .36, 1), box-shadow .14s, filter .12s;
 }
 .fluentform .ff-btn-submit:hover,
 .fluentform .ff-btn-submit:focus {
-	background-color: var(--wp--preset--color--ras-warm-charcoal) !important;
-	color: var(--wp--preset--color--ras-light) !important;
+	transform: translateY(-1.5px);
+	filter: brightness(1.08);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 7px 14px rgba(110, 80, 20, .26) !important;
+}
+.fluentform .ff-btn-submit:active {
+	transform: translateY(0);
+	box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35), 0 3px 6px rgba(0, 0, 0, .2) !important;
 }
 
 /* WooCommerce My Account — match the Reach Any Stars palette. One pass styles
@@ -226,9 +323,9 @@ License: GNU General Public License v2 or later
 .woocommerce .input-text:focus,
 .woocommerce textarea:focus,
 .woocommerce select:focus {
-	border-color: var(--wp--preset--color--ras-ink);
+	border-color: var(--wp--preset--color--ras-gold);
 	outline: none;
-	box-shadow: 0 0 0 3px rgba(110, 102, 92, 0.18);
+	box-shadow: 0 0 0 3px rgba(184, 137, 59, 0.22);
 }
 
 /* Account: lay nav + content side by side and let the nav hug its content.
@@ -338,10 +435,17 @@ License: GNU General Public License v2 or later
 		--wp--preset--color--ras-graphite: #2c261f;/* CTA band — lift above page bg */
 	}
 
-	/* CTA band button: its text is ras-ink, now light — force it dark so the
-	   light-bg button stays readable. !important to beat WP's has-*-color. */
-	html:root .wp-block-button__link.has-ras-light-background-color.has-ras-ink-color {
-		color: #1a1714 !important;
+	/* Accent in dark mode: lift the gold to a lighter tone for legibility on
+	   dark. Outline buttons + the gold price use it; the glossy primary buttons
+	   are self-coloured, so they read fine on both modes. */
+	html:root .wp-block-button.is-style-outline > .wp-block-button__link {
+		color: var(--wp--preset--color--ras-gold-light) !important;
+		border-color: var(--wp--preset--color--ras-gold) !important;
+	}
+	html:root .woocommerce-Price-amount,
+	html:root .woocommerce ul.products li.product .price,
+	html:root .woocommerce div.product p.price {
+		color: var(--wp--preset--color--ras-gold-light);
 	}
 
 	/* Graphite (dark) logos — invert them to read on a dark bg. */
