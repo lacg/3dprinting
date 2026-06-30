@@ -171,8 +171,8 @@ License: GNU General Public License v2 or later
 	height: 100%;
 	object-fit: cover;
 	opacity: 0;
-	filter: blur(9px) saturate(1.06);   /* heavy blur → soft colour wash, not a logo */
-	transform: scale(1.18);             /* hide the blur's soft edges */
+	filter: blur(5px) saturate(1.06);   /* light blur — the tiles are already shapeless */
+	transform: scale(1.08);             /* small scale to clear the blur's soft edge */
 	animation: ras-hero-cf 48s infinite;
 	will-change: opacity;
 }
@@ -183,18 +183,23 @@ License: GNU General Public License v2 or later
 .ras-hero-gallery img:nth-child(5) { animation-delay: 32s; }
 .ras-hero-gallery img:nth-child(6) { animation-delay: 40s; }
 @keyframes ras-hero-cf {
-	0% { opacity: 0; } 3% { opacity: 1; } 14% { opacity: 1; } 18% { opacity: 0; } 100% { opacity: 0; }
+	0% { opacity: 0; } 3% { opacity: 0.85; } 14% { opacity: 0.85; } 18% { opacity: 0; } 100% { opacity: 0; }
 }
 /* Scrim follows the paper colour (color-mix) so it adapts to dark mode. */
 .ras-hero-scrim {
 	background: radial-gradient(120% 90% at 50% 42%,
-		color-mix(in srgb, var(--wp--preset--color--ras-paper) 70%, transparent),
-		color-mix(in srgb, var(--wp--preset--color--ras-paper) 88%, transparent) 70%,
-		color-mix(in srgb, var(--wp--preset--color--ras-paper) 96%, transparent));
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 55%, transparent),
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 80%, transparent) 70%,
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 92%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
 	.ras-hero-gallery img { animation: none; }
-	.ras-hero-gallery img:nth-child(1) { opacity: 1; }  /* hold one frame, no motion */
+	.ras-hero-gallery img:nth-child(1) { opacity: 0.85; }  /* hold one frame, no motion */
+}
+/* Dark mode: the light wash tiles read brighter on the near-black page — dim a
+   little so they stay an ambient glow. */
+@media (prefers-color-scheme: dark) {
+	.ras-hero-gallery { opacity: 0.6; }
 }
 
 /* About page: each section dissolves in as it scrolls into view (fade only,
