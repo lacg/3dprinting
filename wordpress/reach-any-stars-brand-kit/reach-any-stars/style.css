@@ -146,6 +146,57 @@ License: GNU General Public License v2 or later
 	}
 }
 
+/* Home hero: a soft cross-fading product gallery behind the headline. A scrim
+   sits between the images and the text so the words always stay dominant.
+   Swap assets/images/products/*.png for real photos later (same filenames). */
+.ras-hero { position: relative; isolation: isolate; overflow: hidden; }
+.ras-hero > .ras-hero-bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	max-width: none;          /* override the 60rem cap on hero children */
+	margin: 0;
+	animation: none;          /* opt out of the rise-in */
+	pointer-events: none;
+	overflow: hidden;         /* clip the scaled-up gallery so it can't bleed
+	                             past the hero (e.g. up behind the header) */
+}
+.ras-hero > :not(.ras-hero-bg) { position: relative; z-index: 1; }
+.ras-hero-gallery,
+.ras-hero-scrim { position: absolute; inset: 0; }
+.ras-hero-gallery img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0;
+	filter: blur(9px) saturate(1.06);   /* heavy blur → soft colour wash, not a logo */
+	transform: scale(1.18);             /* hide the blur's soft edges */
+	animation: ras-hero-cf 48s infinite;
+	will-change: opacity;
+}
+.ras-hero-gallery img:nth-child(1) { animation-delay: 0s; }
+.ras-hero-gallery img:nth-child(2) { animation-delay: 8s; }
+.ras-hero-gallery img:nth-child(3) { animation-delay: 16s; }
+.ras-hero-gallery img:nth-child(4) { animation-delay: 24s; }
+.ras-hero-gallery img:nth-child(5) { animation-delay: 32s; }
+.ras-hero-gallery img:nth-child(6) { animation-delay: 40s; }
+@keyframes ras-hero-cf {
+	0% { opacity: 0; } 3% { opacity: 1; } 14% { opacity: 1; } 18% { opacity: 0; } 100% { opacity: 0; }
+}
+/* Scrim follows the paper colour (color-mix) so it adapts to dark mode. */
+.ras-hero-scrim {
+	background: radial-gradient(120% 90% at 50% 42%,
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 70%, transparent),
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 88%, transparent) 70%,
+		color-mix(in srgb, var(--wp--preset--color--ras-paper) 96%, transparent));
+}
+@media (prefers-reduced-motion: reduce) {
+	.ras-hero-gallery img { animation: none; }
+	.ras-hero-gallery img:nth-child(1) { opacity: 1; }  /* hold one frame, no motion */
+}
+
 /* About page: each section dissolves in as it scrolls into view (fade only,
    no movement). Scroll-driven — tied to the viewport, no JavaScript. Wrapped
    in @supports so the opacity:0 start state ONLY applies where scroll timelines
