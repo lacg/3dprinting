@@ -39,3 +39,12 @@ add_action( 'wp_enqueue_scripts', function () {
 		$style_ver
 	);
 }, 20 );
+
+// Account menu: we're already inside the account area, so "Account details"
+// reads better as simply "Details".
+add_filter( 'woocommerce_account_menu_items', function ( $items ) {
+	if ( isset( $items['edit-account'] ) ) {
+		$items['edit-account'] = __( 'Details', 'reach-any-stars' );
+	}
+	return $items;
+} );
