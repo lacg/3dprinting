@@ -60,7 +60,7 @@ License: GNU General Public License v2 or later
 .ras-header-bar > .ras-nav {
 	justify-self: center;
 }
-.ras-header-bar > .ras-cart {
+.ras-header-bar > .ras-utility {
 	justify-self: end;
 }
 
@@ -170,6 +170,77 @@ License: GNU General Public License v2 or later
 	color: var(--wp--preset--color--ras-light) !important;
 }
 
+/* WooCommerce My Account — match the Reach Any Stars palette. One pass styles
+   every account endpoint (login, register, dashboard, orders, addresses).
+   Uses palette variables, so it adapts in dark mode. */
+.woocommerce form.login,
+.woocommerce form.register {
+	border: 1px solid var(--wp--preset--color--ras-line);
+	border-radius: 8px;
+	padding: var(--wp--preset--spacing--50);
+}
+.woocommerce .input-text,
+.woocommerce input[type="text"],
+.woocommerce input[type="email"],
+.woocommerce input[type="password"],
+.woocommerce input[type="tel"],
+.woocommerce input[type="number"],
+.woocommerce textarea,
+.woocommerce select {
+	border: 1px solid var(--wp--preset--color--ras-line);
+	background-color: var(--wp--preset--color--ras-surface);
+	color: var(--wp--preset--color--ras-ink);
+	border-radius: 6px;
+	padding: 0.7rem 0.85rem;
+}
+.woocommerce .input-text:focus,
+.woocommerce textarea:focus,
+.woocommerce select:focus {
+	border-color: var(--wp--preset--color--ras-ink);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(110, 102, 92, 0.18);
+}
+
+/* Account navigation (logged-in tabs) */
+.woocommerce-MyAccount-navigation ul {
+	list-style: none;
+	margin: 0 0 var(--wp--preset--spacing--50);
+	padding: 0;
+	border: 1px solid var(--wp--preset--color--ras-line);
+	border-radius: 8px;
+	overflow: hidden;
+}
+.woocommerce-MyAccount-navigation li {
+	border-bottom: 1px solid var(--wp--preset--color--ras-line);
+}
+.woocommerce-MyAccount-navigation li:last-child {
+	border-bottom: none;
+}
+.woocommerce-MyAccount-navigation li a {
+	display: block;
+	padding: 0.7rem 1rem;
+	color: var(--wp--preset--color--ras-ink);
+	font-weight: 500;
+	text-decoration: none;
+}
+.woocommerce-MyAccount-navigation li.is-active a,
+.woocommerce-MyAccount-navigation li a:hover {
+	background-color: var(--wp--preset--color--ras-surface);
+}
+
+/* Orders / addresses tables */
+.woocommerce table.shop_table {
+	border: 1px solid var(--wp--preset--color--ras-line);
+	border-radius: 8px;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+	border-top: 1px solid var(--wp--preset--color--ras-line);
+	padding: 0.75rem;
+}
+
 /* ===== DARK MODE — follows the OS / system colour scheme ===== */
 @media (prefers-color-scheme: dark) {
 	html:root {
@@ -189,8 +260,9 @@ License: GNU General Public License v2 or later
 		color: #1a1714 !important;
 	}
 
-	/* Header mark is the graphite (dark) logo — invert it to read on a dark bg. */
-	html:root .wp-block-site-logo img {
+	/* Graphite (dark) logos — invert them to read on a dark bg. */
+	html:root .wp-block-site-logo img,
+	html:root .ras-mark img {
 		filter: invert(1);
 	}
 
