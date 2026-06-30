@@ -63,6 +63,12 @@ License: GNU General Public License v2 or later
 .ras-header-bar > .ras-utility {
 	justify-self: end;
 }
+/* Sit the cart snug to the Account link: the bulk of the gap is the mini-cart
+   button's own padding, so trim it (the group gap then sets the final spacing). */
+.ras-utility .wc-block-mini-cart__button {
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+}
 
 /* Menu words animate in on page load (staggered), once — no hover needed.
    The cart is a separate grid child with no animation, so it shows instantly. */
