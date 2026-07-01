@@ -6,19 +6,20 @@ this file; the future print-queue automation reads the same segments.
 ## Format
 
 ```
-RAS-<PRODUCT>-<SIZE>-<COLOUR>-<FINISH>
+RAS-<TYPE>-<MODEL>-<SIZE>-<COLOUR>-<FINISH>
 ```
 
 - Hyphen-delimited → parsed by splitting on `-`, **not** by character position, so
   segments can be any length (no padding, no capacity ceiling).
-- Example: `RAS-PLANTR-010-PURPLE-SILK` = Reach Any Stars · Planter · 10 cm · Purple · Silk.
+- Example: `RAS-PLANTR-ORION-010-PURPLE-SILK` = Reach Any Stars · Planter · Orion · 10 cm · Purple · Silk.
 
 ### Segments
 
 | Segment | Rule | Examples |
 |---|---|---|
 | `RAS` | Fixed brand prefix (Reach Any Stars). Always present. | `RAS` |
-| `PRODUCT` | 6-letter product code (see table). | `PLANTR` |
+| `TYPE` | 6-letter item-type code (see table). Type-first groups a family together when sorted. | `PLANTR` |
+| `MODEL` | Product model name — unique per product, on-brand (star/constellation). | `ORION`, `LUNA` |
 | `SIZE` | Primary dimension in **cm**, zero-padded to 3 digits (sorts correctly). | `008`, `010`, `030` |
 | `COLOUR` | Readable colour word (any length). | `PURPLE`, `BLACK`, `CORAL` |
 | `FINISH` | Readable finish word (any length). | `SILK`, `MATTE`, `SATIN` |
@@ -27,16 +28,18 @@ RAS-<PRODUCT>-<SIZE>-<COLOUR>-<FINISH>
 "Black Matte"), so in WooCommerce this is **Size × Filament** (Filament = the spools we
 carry), never a colour × finish cross-product.
 
-## Product codes (6 letters)
+## Product codes (TYPE + MODEL)
 
-| Product | Code |
-|---|---|
-| Atlas Phone Stand | `PHONST` |
-| Comet Keychain | `KEYCHN` |
-| Luna Tealight Holder | `TEALGT` |
-| Nova Pendant Lamp Shade | `PENDNT` |
-| Orion Faceted Planter | `PLANTR` |
-| Vega Desk Organizer | `ORGNZR` |
+Item-type code (6 letters) + model name (unique per product, star/constellation).
+
+| Product | Type | Model |
+|---|---|---|
+| Atlas Phone Stand | `PHONST` | `ATLAS` |
+| Comet Keychain | `KEYCHN` | `COMET` |
+| Luna Tealight Holder | `TEALGT` | `LUNA` |
+| Nova Pendant Lamp Shade | `PENDNT` | `NOVA` |
+| Orion Faceted Planter | `PLANTR` | `ORION` |
+| Vega Desk Organizer | `ORGNZR` | `VEGA` |
 
 ## Finish words
 
