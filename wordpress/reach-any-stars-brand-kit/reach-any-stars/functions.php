@@ -48,3 +48,21 @@ add_filter( 'woocommerce_account_menu_items', function ( $items ) {
 	}
 	return $items;
 } );
+
+// "Collection" taxonomy for products: a design line / theme (Orion, Vega, Atlas…)
+// that can span multiple product types (an Orion phone stand, iPad stand, planter…).
+// Gives /collection/<slug>/ archive pages and a second browse axis alongside categories.
+add_action( 'init', function () {
+	register_taxonomy( 'ras_collection', array( 'product' ), array(
+		'labels'            => array(
+			'name'          => __( 'Collections', 'reach-any-stars' ),
+			'singular_name' => __( 'Collection', 'reach-any-stars' ),
+			'menu_name'     => __( 'Collections', 'reach-any-stars' ),
+		),
+		'public'            => true,
+		'hierarchical'      => true,   // category-like (checkbox UI, archive pages)
+		'show_admin_column' => true,
+		'show_in_rest'      => true,   // block editor + REST
+		'rewrite'           => array( 'slug' => 'collection' ),
+	) );
+} );
